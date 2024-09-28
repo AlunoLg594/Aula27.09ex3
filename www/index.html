@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo do Alvo</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+        #target {
+            width: 100px;
+            height: 100px;
+            background-color: purple;
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+        }
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="score">Pontuação: 0</div>
+    <div id="target"></div>
+    <script src="cordova.js"></script>
+
+
+    <script>
+        const target = document.getElementById('target');
+        const scoreDisplay = document.getElementById('score');
+
+        let score = 0;
+
+        function randomPosition() {
+            const x = Math.random() * (window.innerWidth - 50);
+            const y = Math.random() * (window.innerHeight - 50);
+            target.style.left = `${x}px`;
+            target.style.top = `${y}px`;
+        }
+
+        target.addEventListener('click', botao)
+
+        function botao(){
+            navigator.notification.beep(1);
+            score++;
+            scoreDisplay.textContent = `Pontuação: ${score}`;
+            randomPosition();
+        }
+        
+
+        randomPosition(); // Inicializa a posição do alvo
+    </script>
+
+</body>
+</html>
